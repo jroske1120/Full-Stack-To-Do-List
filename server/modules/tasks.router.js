@@ -20,6 +20,18 @@ taskRouter.get('/', (req, res) => {
 
 //POST
 
+taskRouter.post('/', (req, res) => {
+    console.log('in /tasks POST:', req.body);
+    let queryString = `INSERT INTO "todo" ( "task" ) 
+        VALUES ( $1 )`;
+    pool.query(queryString,
+        [req.body.task ]).then((result) => {
+            // res.sendStatus( 201 );
+        }).catch((err) => {
+            console.log(err);
+            res.sendStatus(500);
+        }) //end query
+})
 //PUT
 
 //DELETE

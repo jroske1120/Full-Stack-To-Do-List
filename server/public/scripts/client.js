@@ -4,34 +4,35 @@ let tasks = [];
 
 function onReady() {
     console.log('in onReady');
-    // $('#btn-add').on('click', addTask);
+    $('#btn-add').on('click', addTask);
     getTasks();
+    $('#tasksOut').on('click', '.btn-deleteTask', deleteTask);
+
 }
 
-// function addTask(event) {
-//     event.preventDefault();
-//     console.log('in addTask');
-//     // get user input and put in an object
-//     // using a test object
-//     const taskToSend = {
-//         task: $('#taskIn').val()
-//     }
-//     console.log('sending:', taskToSend);
-//     // send the data to the server via POST
-//     $.ajax({
-//         type: 'POST',
-//         url: '/tasks',
-//         data: taskToSend
-//     }).then(function (response) {
-//         console.log('back from POST:', response);
-//         getTasks();
-//         //empty inputs
-//         $("#taskIn").val("");
-//     }).catch(function (err) {
-//         console.log(err);
-//         alert('no workly');
-//     }) // end AJAX
-// }
+function addTask() {
+    console.log('in addTask');
+    // get user input and put in an object
+    // using a test object
+    const taskToSend = {
+        task: $('#taskIn').val()
+    }
+    console.log('sending:', taskToSend);
+    // send the data to the server via POST
+    $.ajax({
+        type: 'POST',
+        url: '/tasks',
+        data: taskToSend
+    }).then(function (response) {
+        console.log('back from POST:', response);
+        getTasks();
+        //empty inputs
+        $("#taskIn").val("");
+    }).catch(function (err) {
+        console.log(err);
+        alert('no workly');
+    }) // end AJAX
+}
 
 
 function getTasks() {
@@ -51,11 +52,16 @@ function getTasks() {
             el.append(`<tr>
             <td></td>
               <td>${ response[i].task}</td>
-              <td></td>
+              <td><button class="btn-deleteTask">Delete</button></td>
           </tr>`)
         }
     }).catch(function (err) {
         console.log(err);
         alert('nope');
     })
+}
+
+function deleteTask(){
+    console.log('in deleteTask');
+    
 }
