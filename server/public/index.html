@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do List</title>
+    <script src="vendors/jquery-3.3.1.min.js" charset="utf-8"></script>
+  <script src="scripts/client.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="styles/blueAndGold.css">
+</head>
+<h1>To Do List</h1>
+<body>
+    <section>
+        <form>
+            <input type="text" id="taskIn" placeholder="Task Description">
+            <button id="btn-add">Add Task</button>
+        </form>
+    </section>
+    <section>
+        <h2>My Tasks</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Completed?</th>
+                    <th>Task Description</th>
+                    <th>Delete Task</th>
+                </tr>
+            </thead>
+            <tbody id="tasksOut">
+            </tbody>
+        </table>
+    </section>
+</body>
+
+</html>
