@@ -52,7 +52,7 @@ function getTasks() {
             el.append(`<tr>
             <td></td>
               <td>${ response[i].task}</td>
-              <td><button class="btn-deleteTask">Delete</button></td>
+              <td><button class="btn-deleteTask" data-id=${ response[i].id}>Delete</button></td>
           </tr>`)
         }
     }).catch(function (err) {
@@ -63,5 +63,16 @@ function getTasks() {
 
 function deleteTask(){
     console.log('in deleteTask');
-    
-}
+    $.ajax({
+        type: "DELETE",
+        url: "/tasks/" + $(this).data("id"),
+      })
+        .then(function (response) {
+          console.log("back from DELETE:", response);
+          getTasks();
+        })
+        .catch(function (err) {
+          console.log(err);
+          alert("nope");
+        }); //end AJAX
+    }

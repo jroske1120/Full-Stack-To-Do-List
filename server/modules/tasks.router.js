@@ -26,7 +26,7 @@ taskRouter.post('/', (req, res) => {
         VALUES ( $1 )`;
     pool.query(queryString,
         [req.body.task ]).then((result) => {
-            // res.sendStatus( 201 );
+        res.sendStatus( 201 );
         }).catch((err) => {
             console.log(err);
             res.sendStatus(500);
@@ -35,7 +35,16 @@ taskRouter.post('/', (req, res) => {
 //PUT
 
 //DELETE
-
+taskRouter.delete('/:id', (req, res) => {
+    console.log('/tasks DELETE hit:', req.params.id);
+    //have pool run a delete
+    let queryString = `DELETE FROM "todo" WHERE "id"=${req.params.id};`;
+    pool.query(queryString).then((results) => {
+        res.sendStatus( 201 );
+    }).catch((err) => {
+        console.log('problem');
+    })
+})//end delete request
 
 
 
