@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-do List</title>
     <script src="vendors/jquery-3.3.1.min.js" charset="utf-8"></script>
-  <script src="scripts/client.js" charset="utf-8"></script>
-  <!-- <link rel="stylesheet" href="styles/blueAndGold.css"> -->
-  <link rel="stylesheet" href="styles/style.css">
+    <script src="scripts/client.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="styles/blueAndGold.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <h1>To Do List</h1>
+
 <body>
     <section>
         <form>
@@ -30,9 +31,24 @@
             </thead>
             <tbody id="tasksOut">
             </tbody>
-            <tfoot class="completeTasksOut" >
+            <tfoot>
 
             </tfoot>
+        </table>
+    </section>
+    <section>
+        <h2>Completed Tasks</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Completed When</th>
+                    <th>Task Description</th>
+                    <th>Delete Task</th>
+                </tr>
+            </thead>
+            <tbody id="completeTasksOut">
+
+            </tbody>
         </table>
     </section>
 </body>

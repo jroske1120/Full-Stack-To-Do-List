@@ -22,8 +22,8 @@ taskRouter.get('/', (req, res) => {
 
 taskRouter.post('/', (req, res) => {
     console.log('in /tasks POST:', req.body);
-    let queryString = `INSERT INTO "todo" ( "task" ) 
-        VALUES ( $1 )`; //task entered will be automatically considered incomplete
+    let queryString = `INSERT INTO "todo" ( "task", "date_completed" ) 
+        VALUES ( $1, current_timestamp )`; //task entered will be automatically considered incomplete
     pool.query(queryString,
         [req.body.task ]).then((result) => {
         res.sendStatus( 201 );
