@@ -19,26 +19,24 @@ taskRouter.get('/', (req, res) => {
 })
 
 //POST
-
 taskRouter.post('/', (req, res) => {
     console.log('in /tasks POST:', req.body);
     let queryString = `INSERT INTO "todo" ( "task", "date_completed" ) 
         VALUES ( $1, current_timestamp )`; //task entered will be automatically considered incomplete
     pool.query(queryString,
         [req.body.task ]).then((result) => {
-        res.sendStatus( 201 );
         }).catch((err) => {
             console.log(err);
             res.sendStatus(500);
         }) //end query
 })
-//PUT
 
+//PUT
 taskRouter.put('/:id', (req, res) => {
     console.log('/tasks PUT:', req.params.id);
     res.send('whinny');
-    let queryString = `UPDATE todo SET complete = true WHERE id = $1;`;
-    pool.query(queryString, [req.params.id]).then((results) => {
+    let queryString = `UPDATE todo SET complete = true, date_completed = CURRENT_TIMESTAMP WHERE id = $1;`;
+    pool.query(queryString, [req.params.id]).then(() => {
     }).catch((err) => {
         console.log(err);
         res.sendStatus(500);
@@ -56,9 +54,5 @@ taskRouter.delete('/:id', (req, res) => {
         console.log('problem');
     })
 })//end delete request
-
-
-
-
 
 module.exports = taskRouter;

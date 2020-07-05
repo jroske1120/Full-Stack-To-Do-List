@@ -1,17 +1,5 @@
 $(document).ready(onReady);
 
-let tasks = [];
-
-function onReady() {
-    console.log('in onReady');
-    $('#btn-add').on('click', addTask);
-    getTasks();
-    $('#completeTasksOut').on('click', '.btn-deleteTask', deleteTask);
-    $('#tasksOut').on('click', '.btn-completeTask', completeTask);
-    $('#tasksOut').on('click', '.btn-deleteTask', deleteTask);
-
-}
-
 function addTask() {
     console.log('in addTask');
     // get user input and put in an object
@@ -36,41 +24,9 @@ function addTask() {
     }) // end AJAX
 }
 
-
-function getTasks() {
-    console.log('in getTasks');
-    $.ajax({
-        type: 'GET',
-        url: '/tasks'
-    }).then(function (response) {
-        console.log('back from GET:', response);
-        $('#tasksOut').empty();
-        $('#completeTasksOut').empty();
-        for (let i = 0; i < response.length; i++) {
-            if (response[i].complete === false) {
-                $('#tasksOut').prepend(`<tr>
-                <td><button class="btn-completeTask" data-id=${response[i].id}>Complete</button></td>              
-                <td>${response[i].task}</td>
-                <td><button class="btn-deleteTask" data-id=${ response[i].id}>Delete</button></td>
-              </tr>`)
-            } else {
-                $('#completeTasksOut').prepend(`<tr>
-            <td>${response[i].date_completed.split( "T" )[0]}</td>              
-            <td>${response[i].task}</td>
-            <td><button class="btn-deleteTask" data-id=${ response[i].id}>Delete</button></td>
-          </tr>`)
-            }
-        }
-    }).catch(function (err) {
-        console.log(err);
-        alert('nope, GET didnt work');
-    })
-}
-
 function completeTask() {
-    console.log('in completeTask', $(this).data('id'));
     const completeTask = $(this).data('id');
-    console.log('the koala that is ready is:', completeTask);
+    console.log('in completeTask:', completeTask);
     $.ajax({
         method: 'PUT',
         url: `/tasks/` + completeTask,
@@ -83,7 +39,6 @@ function completeTask() {
         console.log(error);
     })
 }
-
 
 function deleteTask() {
     console.log('in deleteTask');
@@ -98,5 +53,47 @@ function deleteTask() {
         .catch(function (err) {
             console.log(err);
             alert("nope");
-        }); //end AJAX
+        }); 
+}
+
+function getTasks() {
+    console.log('in getTasks');
+    $.ajax({
+        type: 'GET',
+        url: '/tasks'
+    }).then(function (response) {
+        console.log('back from GET:', response);
+        $('#tasksOut').empty();
+        $('#completeTasksOut').empty();
+        for (let i = 0; i < response.length; i++) {
+            //two different tables, to-do and completed
+            //if incomplete (complete === false) append to first
+            if (!response[i].complete) {
+                $('#tasksOut').prepend(`<tr>
+                <td><button class="btn-completeTask" data-id=${response[i].id}>Complete</button></td>              
+                <td>${response[i].task}</td>
+                <td><button class="btn-deleteTask" data-id=${ response[i].id}>Delete</button></td>
+              </tr>`)
+            } else { //otherwise prepend to second table of completed tasks
+                $('#completeTasksOut').prepend(`<tr>
+            <td>${response[i].date_completed.split( "T" )[0]}</td>              
+            <td>${response[i].task}</td>
+            <td><button class="btn-deleteTask" data-id=${ response[i].id}>Delete</button></td>
+          </tr>`) //appends timestamp that has been updated on the PUT click of btn-complete
+            }
+        }
+    }).catch(function (err) {
+        console.log(err);
+        alert('nope, GET didnt work');
+    })
+}
+
+function onReady() {
+    console.log('in onReady');
+    $('#btn-add').on('click', addTask);
+    getTasks();
+    $('#completeTasksOut').on('click', '.btn-deleteTask', deleteTask);
+    $('#tasksOut').on('click', '.btn-completeTask', completeTask);
+    $('#tasksOut').on('click', '.btn-deleteTask', deleteTask);
+
 }
