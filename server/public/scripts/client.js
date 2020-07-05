@@ -76,7 +76,8 @@ function getTasks() {
               </tr>`)
             } else { //otherwise prepend to second table of completed tasks
                 $('#completeTasksOut').prepend(`<tr>
-            <td>${response[i].date_completed.split( "T" )[0]}</td>              
+            <td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Checkmark.svg/1200px-Checkmark.svg.png" width="30">
+            ${response[i].date_completed.split( "T" )[0]}</td>              
             <td>${response[i].task}</td>
             <td><button class="btn-deleteTask" data-id=${ response[i].id}>Delete</button></td>
           </tr>`) //appends timestamp that has been updated on the PUT click of btn-complete
