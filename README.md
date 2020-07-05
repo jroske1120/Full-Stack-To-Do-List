@@ -10,3 +10,6 @@ Additional README details can be found [here](https://github.com/PrimeAcademy/re
 
 npm init -y
 npm install express pg
+
+
+Difficulties
