@@ -53,7 +53,7 @@ function deleteTask() {
         .catch(function (err) {
             console.log(err);
             alert("nope");
-        }); 
+        });
 }
 
 function getTasks() {
@@ -70,16 +70,24 @@ function getTasks() {
             //if incomplete (complete === false) append to first
             if (!response[i].complete) {
                 $('#tasksOut').prepend(`<tr>
-                <td><button class="btn-completeTask" data-id=${response[i].id}>Complete</button></td>              
+                <td>
+                <button class="btn-completeTask" data-id=${response[i].id}>Complete</button>
+                </td>              
                 <td>${response[i].task}</td>
-                <td><button class="btn-deleteTask" data-id=${ response[i].id}>Delete</button></td>
+                <td>
+                <button class="btn-deleteTask" data-id=${ response[i].id}>Delete</button>
+                </td>
               </tr>`)
             } else { //otherwise prepend to second table of completed tasks
                 $('#completeTasksOut').prepend(`<tr>
-            <td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Checkmark.svg/1200px-Checkmark.svg.png" width="30">
-            ${response[i].date_completed.split( "T" )[0]}</td>              
+            <td>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Checkmark.svg/1200px-Checkmark.svg.png" width="30">
+            ${response[i].date_completed.split("T")[0]}
+            </td>              
             <td>${response[i].task}</td>
-            <td><button class="btn-deleteTask" data-id=${ response[i].id}>Delete</button></td>
+            <td>
+            <button class="btn-deleteTask" data-id=${ response[i].id}>Delete</button>
+            </td>
           </tr>`) //appends timestamp that has been updated on the PUT click of btn-complete
             }
         }
