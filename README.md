@@ -9,7 +9,7 @@ This is Joel Roske's full stack To Do List App.
 
 ## Screen Shot
 
-![image](/server/public/styles/To-do List Screenshot.png)
+![image](To-do List Screenshot.png)
 
 ### Prerequisites
 
