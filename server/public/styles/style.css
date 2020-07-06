@@ -17,5 +17,5 @@ body {
 }
 
 #completeTasksOut {
-    background-color: rgb(50, 177, 216);
+    background-image: linear-gradient(to right, rgb(50, 177, 216),rgb(136, 177, 204),rgb(50, 177, 216));
 }
