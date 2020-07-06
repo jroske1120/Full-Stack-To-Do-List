@@ -25,20 +25,18 @@ function addTask() {
 }
 
 function completeTask() {
-    const completeTask = $(this).data('id');
-    console.log('in completeTask:', completeTask);
+    console.log('in completeTask:', $(this).data("id"));
     $.ajax({
         method: 'PUT',
-        url: `/tasks/` + completeTask,
-        data: { complete: true }
+        url: `/tasks/` + $(this).data("id")
     }).then(function (response) {
-        getTasks();
         console.log('back from PUT with:', response);
+        getTasks();
     }).catch(function (error) {
         alert('error with PUT completion. see console for details');
         console.log(error);
     })
-}
+} getTasks();
 
 function deleteTask() {
     console.log('in deleteTask');
