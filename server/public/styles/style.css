@@ -16,6 +16,11 @@ body {
     text-align: center;
 }
 
+#tasksOut {
+    background-image: linear-gradient(to right, rgb(196, 83, 83),rgb(202, 145, 145),rgb(196, 83, 83));
+
+}
+
 #completeTasksOut {
     background-image: linear-gradient(to right, rgb(50, 177, 216),rgb(136, 177, 204),rgb(50, 177, 216));
 }

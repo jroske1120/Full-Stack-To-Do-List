@@ -29,7 +29,7 @@ h2, h3, h4, h5, h6 {
 }
 
 section:nth-of-type(odd) {
-  /* background-color: #FFD4CA; */
+  background-color: #FFD4CA;
   background-color: #f7f4ee;
 }
 
