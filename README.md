@@ -9,7 +9,7 @@ This is Joel Roske's full stack To Do List App.
 
 ## Screen Shot
 
-![image](To-do List Screenshot.png)
+![To Do List](https://github.com/jroske1120/weekend-sql-to-do-list/blob/master/To-do%20List%20Screenshot.png)
 
 ### Prerequisites
 
