@@ -26,6 +26,7 @@ function addTask() {
 
 function completeTask() {
     console.log('in completeTask:', $(this).data("id"));
+            //target by clicked id
     $.ajax({
         method: 'PUT',
         url: `/tasks/` + $(this).data("id")
@@ -42,10 +43,12 @@ function deleteTask() {
     console.log('in deleteTask');
     $.ajax({
         type: "DELETE",
+        //target by clicked id
         url: "/tasks/" + $(this).data("id"),
     })
         .then(function (response) {
             console.log("back from DELETE:", response);
+            //call the GET that updates DOM
             getTasks();
         })
         .catch(function (err) {
@@ -76,7 +79,9 @@ function getTasks() {
                 <button class="btn-deleteTask" data-id=${ response[i].id}>Delete</button>
                 </td>
               </tr>`)
+              //if task is NOT complete, display button to complete it
             } else { //otherwise prepend to second table of completed tasks
+                //the complete button is replaced by checkmark and timestamp of completion
                 $('#completeTasksOut').prepend(`<tr>
             <td>
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Checkmark.svg/1200px-Checkmark.svg.png" width="30">
@@ -99,6 +104,7 @@ function onReady() {
     console.log('in onReady');
     $('#btn-add').on('click', addTask);
     getTasks();
+    //Buttons below only display in tables after tasks are added
     $('#completeTasksOut').on('click', '.btn-deleteTask', deleteTask);
     $('#tasksOut').on('click', '.btn-completeTask', completeTask);
     $('#tasksOut').on('click', '.btn-deleteTask', deleteTask);

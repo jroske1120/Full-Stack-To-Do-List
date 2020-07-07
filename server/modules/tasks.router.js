@@ -10,7 +10,7 @@ taskRouter.get('/', (req, res) => {
     /// - query: SELECT * FROM "tasks" - ///
     let queryString = `SELECT * FROM todo ORDER BY "id";`;
     pool.query(queryString).then((result) => {
-        // success
+        // success, show updated table
         res.send(result.rows);
     }).catch((err) => {
         // error
@@ -25,6 +25,7 @@ taskRouter.post('/', (req, res) => {
         VALUES ( $1, current_timestamp )`; //task entered will be automatically considered incomplete
     pool.query(queryString,
         [req.body.task ]).then((result) => {
+            res.send(result.rows);
         }).catch((err) => {
             console.log(err);
             res.sendStatus(500);
@@ -34,9 +35,10 @@ taskRouter.post('/', (req, res) => {
 //PUT
 taskRouter.put('/:id', (req, res) => {
     console.log('/tasks PUT:', req.params.id);
-    res.send('whinny');
     let queryString = `UPDATE todo SET complete = true, date_completed = CURRENT_TIMESTAMP WHERE id = $1;`;
-    pool.query(queryString, [req.params.id]).then(() => {
+    //sets boolean to complete and updates date, both will render
+    pool.query(queryString, [req.params.id]).then((result) => {
+        res.send(result.rows);
     }).catch((err) => {
         console.log(err);
         res.sendStatus(500);
@@ -46,12 +48,13 @@ taskRouter.put('/:id', (req, res) => {
 //DELETE
 taskRouter.delete('/:id', (req, res) => {
     console.log('/tasks DELETE hit:', req.params.id);
-    //have pool run a delete
+    //have pool run a delete to match clicked id
     let queryString = `DELETE FROM "todo" WHERE "id"=$1;`;
     pool.query(queryString, [req.params.id]).then((results) => {
         res.sendStatus( 201 );
     }).catch((err) => {
-        console.log('problem');
+        res.sendStatus(500)
+        console.log('problem in delete');
     })
 })//end delete request
 
