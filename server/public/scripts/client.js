@@ -43,7 +43,7 @@ function deleteTask() {
     console.log('in deleteTask');
     $.ajax({
         type: "DELETE",
-        //target by clicked id
+        //target by clicked "id"
         url: "/tasks/" + $(this).data("id"),
     })
         .then(function (response) {
